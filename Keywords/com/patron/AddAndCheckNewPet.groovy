@@ -20,7 +20,7 @@ public class AddAndCheckNewPet {
 
 	def addNewDog = {
 
-		response = WS.sendRequest(findTestObject('POST New Pet'))
+		response = WS.sendRequest(findTestObject('Pet/POST New Pet'))
 		WS.verifyResponseStatusCode(response, 200)
 		WS.verifyElementPropertyValue(response, 'category.name', GlobalVariable.DogName)
 
@@ -28,7 +28,7 @@ public class AddAndCheckNewPet {
 	}
 
 	def checkDogByID = { String id ->
-		RequestObject getRequest = findTestObject('GET Pet by ID')
+		RequestObject getRequest = findTestObject('Pet/GET Pet by ID')
 		String getRequestUrl = getRequest.getRestUrl().replace('{id}', id)
 		getRequest.setRestUrl(getRequestUrl)
 		response = WS.sendRequest(getRequest)
@@ -41,7 +41,7 @@ public class AddAndCheckNewPet {
 	}
 
 	def updateDogByID = { String id, String status ->
-		RequestObject putRequest = findTestObject('PUT Update Pet')
+		RequestObject putRequest = findTestObject('Pet/PUT Update Pet')
 		String putRequestUrl = putRequest.getRestUrl().replace('{id}', id)
 		String requestBody = """
 			{
@@ -74,7 +74,7 @@ public class AddAndCheckNewPet {
 	}
 
 	def deleteDogByID = { String id ->
-		RequestObject deleteRequest = findTestObject('DELETE Pet by ID')
+		RequestObject deleteRequest = findTestObject('Pet/DELETE Pet by ID')
 		String deleteRequestUrl = deleteRequest.getRestUrl().replace('{id}', id)
 		deleteRequest.setRestUrl(deleteRequestUrl)
 		response = WS.sendRequest(deleteRequest)
