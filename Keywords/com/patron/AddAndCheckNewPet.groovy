@@ -29,13 +29,13 @@ public class AddAndCheckNewPet {
 
 	def checkDogByID = { String id ->
 		RequestObject getRequest = findTestObject('GET Pet by ID')
-
 		String getRequestUrl = getRequest.getRestUrl().replace('{id}', id)
 		getRequest.setRestUrl(getRequestUrl)
-
 		response = WS.sendRequest(getRequest)
+		
 		logInfo("Dog Name: " + (String) WS.getElementPropertyValue(response, 'category.name'))
 		logInfo("Dog Status: " + (String) WS.getElementPropertyValue(response, 'status'))
+		
 		WS.verifyResponseStatusCode(response, 200)
 		WS.verifyElementPropertyValue(response, 'category.name', GlobalVariable.DogName)
 	}
@@ -43,10 +43,9 @@ public class AddAndCheckNewPet {
 	def updateDogByID = { String id, String status ->
 		RequestObject putRequest = findTestObject('PUT Update Pet')
 		String putRequestUrl = putRequest.getRestUrl().replace('{id}', id)
-	
 		String requestBody = """
 {
-  "id": 9223372036854775807,
+  "id": 0,
   "category": {
     "id": 0,
     "name": "${GlobalVariable.DogName}"
@@ -66,8 +65,10 @@ public class AddAndCheckNewPet {
 """
 		putRequest.setHttpBody(requestBody)
 		response = WS.sendRequest(putRequest)
+		
 		logInfo("Dog Name: " + (String) WS.getElementPropertyValue(response, 'category.name'))
 		logInfo("Status: " + (String) WS.getElementPropertyValue(response, 'status'))
+		
 		WS.verifyResponseStatusCode(response, 200)
 		WS.verifyElementPropertyValue(response, "status", status)
 	}
