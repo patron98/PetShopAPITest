@@ -1,0 +1,10 @@
+{
+  "keywordFileContentHash": "A1A8EC9291149293EFBD9C8B6FCC1C05",
+  "keywordClasses": [
+    {
+      "name": "com.patron.AddAndCheckNewPet",
+      "keywordMethods": []
+    }
+  ],
+  "javadocParsed": true
+}
